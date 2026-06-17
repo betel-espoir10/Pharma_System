@@ -1,0 +1,101 @@
+ <style>
+   body {
+        overflow-x: hidden;
+      }
+
+      #sidebar {
+        width: 250px;
+        height: 100vh;
+        position: fixed;
+        background: #212529;
+        transition: all 0.3s;
+      }
+
+      #sidebar.collapsed {
+        width: 70px;
+      }
+
+      #sidebar .nav-link {
+        color: #ccc;
+      }
+
+      #sidebar .nav-link:hover {
+        background: #343a40;
+        color: #fff;
+      }
+
+      .sidebar-header {
+        color: white;
+        padding: 20px;
+        font-size: 20px;
+        text-align: center;
+      }
+
+ </style>
+ 
+ <!-- 📂 SIDEBAR -->
+    <div id="sidebar">
+      <div class="sidebar-header bi bi-list fs-5 text-center fw-bold">Menu</div>
+
+      <ul class="nav flex-column px-2 fw-bold">
+        <li class="nav-item">
+          <a href="/dashboard/index" class="nav-link">
+            <i class="bi bi-speedometer2 me-3"></i> Dashboard
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/drugs/listDrug" class="nav-link">
+            <i class="bi bi-capsule me-3"></i> Médicaments
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/sales/listSale" class="nav-link">
+            <i class="bi bi-cart me-3"></i> Ventes
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/purchases/listPurchase" class="nav-link">
+            <i class="bi bi-bag me-3"></i> Achats
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/batches/listBatch" class="nav-link">
+            <i class="bi bi-box me-3"></i> Stock
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/customers/listCustomer" class="nav-link">
+            <i class="bi bi-people me-3"></i> Clients
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/suppliers/listSupplier" class="nav-link">
+            <i class="bi bi-truck me-3"></i> Fournisseurs
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/users/listUser" class="nav-link">
+            <i class="bi bi-people me-3"></i> Utilisateurs
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/reports" class="nav-link">
+            <i class="bi bi-bar-chart me-3"></i> Rapports
+          </a>
+        </li>
+
+        <li class="nav-item mt-3">
+          <a href="/settings" class="nav-link text-warning">
+            <i class="bi bi-gear me-3"></i> Paramètres
+          </a>
+        </li>
+      </ul>
+    </div>

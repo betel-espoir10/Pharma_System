@@ -1,0 +1,82 @@
+<%- include("../partials/header") %>
+
+        <a href="/home" class="btn btn-secondary m-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-backward-fill" viewBox="0 0 16 16">
+                <path d="M.5 3.5A.5.5 0 0 0 0 4v8a.5.5 0 0 0 1 0V8.753l6.267 3.636c.54.313 1.233-.066 1.233-.697v-2.94l6.267 3.636c.54.314 1.233-.065 1.233-.696V4.308c0-.63-.693-1.01-1.233-.696L8.5 7.248v-2.94c0-.63-.692-1.01-1.233-.696L1 7.248V4a.5.5 0 0 0-.5-.5"/>
+           </svg>
+        </a>
+
+<div class="main-content p-4">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between mb-4">
+            <h2 class="fw-bold">
+                <i class="fa fa-truck text-success"></i>
+                Liste des Achats
+            </h2>
+            <a href="/purchases/addPurchase" class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                Nouvel Achat
+            </a>
+        </div>
+
+        <div class="card shadow border-0">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Facture</th>
+                                <th>Fournisseur</th>
+                                <th>Total</th>
+                                <th>Payé</th>
+                                <th>Reste</th>
+                                <th>Statut</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% purchases.forEach(purchase => { %>
+                                <tr>
+                                    <td> <%= purchase.id %></td>
+                                    <td><%= purchase.invoiceNumber %></td>
+                                    <td> <%= purchase.supplier.name %></td>
+                                    <td> <%= purchase.totalAmount %></td>
+                                    <td> <%= purchase.paidAmount %></td>
+                                    <td><%= purchase.balance %></td>
+                                    <td>
+                                        <% if (purchase.paymentStatus === 'PAID') { %>
+                                            <span class="badge bg-success">Payé</span>
+                                        <% } else { %>
+                                            <span class="badge bg-warning">Partiel</span>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <%= purchase.createdAt.toLocaleDateString() %>
+                                    </td>
+                                    <td>
+                                        <a href="/purchases/editPurchase/<%= purchase.id %>"
+                                           class="btn btn-warning btn-sm">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+
+                                        <a href="/purchases/show/<%= purchase.id %>"
+                                           class="btn btn-info btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+
+                                        <a href="/purchases/cancel/<%= purchase.id %>"
+                                           class="btn btn-danger btn-sm">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

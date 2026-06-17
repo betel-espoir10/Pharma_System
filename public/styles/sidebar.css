@@ -1,0 +1,40 @@
+body {
+  overflow-x: hidden;
+}
+
+#sidebar {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  background: #212529;
+  transition: all 0.3s;
+}
+
+#sidebar.collapsed {
+  width: 70px;
+}
+
+#sidebar .nav-link {
+  color: #ccc;
+}
+
+#sidebar .nav-link:hover {
+  background: #343a40;
+  color: #fff;
+}
+
+#content {
+  margin-left: 250px;
+  transition: all 0.3s;
+}
+
+#content.expanded {
+  margin-left: 70px;
+}
+
+.sidebar-header {
+  color: white;
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
+}

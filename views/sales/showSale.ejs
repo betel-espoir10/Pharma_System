@@ -1,0 +1,118 @@
+<%- include("../partials/header") %>
+
+        <a href="/home" class="btn btn-secondary m-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-backward-fill" viewBox="0 0 16 16">
+                <path d="M.5 3.5A.5.5 0 0 0 0 4v8a.5.5 0 0 0 1 0V8.753l6.267 3.636c.54.313 1.233-.066 1.233-.697v-2.94l6.267 3.636c.54.314 1.233-.065 1.233-.696V4.308c0-.63-.693-1.01-1.233-.696L8.5 7.248v-2.94c0-.63-.692-1.01-1.233-.696L1 7.248V4a.5.5 0 0 0-.5-.5"/>
+           </svg>
+        </a>
+
+<div class="container py-5">
+    <!-- CARD -->
+    <div class="card shadow-lg border-0">
+
+        <!-- HEADER -->
+        <div class="card-header bg-success text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-0">
+                        <i class="bi bi-receipt"></i>
+                        FACTURE PHARMACIE
+                    </h2>
+                </div>
+
+                <div>
+                    <button onclick="window.print()" class="btn btn-light" >
+                        <i class="bi bi-printer"></i>
+                        Imprimer
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- BODY -->
+        <div class="card-body">
+
+            <!-- INFOS -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h5 class="fw-bold">Informations Client</h5>
+                    <p>
+                        <strong>Nom :</strong>
+                        <%= sale.customer
+                        ? sale.customer.name
+                        : "Client inconnu" %>
+                    </p>
+                </div>
+
+                <div class="col-md-6 text-md-end">
+                    <h5 class="fw-bold"> Informations Vente</h5>
+                    <p>
+                        <strong>N° Facture :</strong>
+                        #<%= sale.id %>
+                    </p>
+                    <p>
+                        <strong>Date :</strong>
+                        <%= new Date(sale.date).toLocaleDateString() %>
+                    </p>
+                </div>
+            </div>
+
+            <!-- TABLE -->
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-success">
+                        <tr>
+
+                            <th>Médicament</th>
+                            <th>Quantité</th>
+                            <th>Prix Unitaire</th>
+                            <th>Total</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (sale.saleItems && sale.saleItems.length > 0) { %>
+                          <% sale.saleItems.forEach(item => { %>
+                              <tr>
+
+                                <td><%= item.drug ? item.drug.name: "Médicament supprimé" %> </td>
+                                <td><%= item.quantity %></td>
+                                <td><%= item.price %></td>
+                                <td> <%= item.quantity * item.price %></td>
+
+                              </tr>
+                          <% }) %>
+                        <% } else { %>
+                          <tr>
+                              <td colspan="4"
+                                  class="text-center text-danger">
+                                  Aucun article trouvé
+                              </td>
+                          </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- TOTAL -->
+            <div class="row mt-4">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <div class="card border-success">
+                        <div class="card-body">
+                            <h4 class="text-end">
+                                TOTAL :                            
+                                <span class="text-success"><%= sale.total_amount %> Frw </span>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="text-center mt-5">
+                <p class="text-muted">Merci pour votre confiance.</p>
+            </div>
+        </div>
+    </div>
+</div>

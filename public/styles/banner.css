@@ -1,0 +1,90 @@
+.hero-section {
+    position: fixed;
+    width: 100%;
+    height: calc(100vh - 70px);
+    overflow: hidden;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* =========================================
+   OVERLAY
+========================================= */
+
+.hero-overlay {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+  /* =========================================
+   TITRE ANIME
+========================================= */
+
+  .slide-title {
+
+    font-size: 4rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateX(-200px);
+    text-shadow: 0 0 20px rgba(255,255,255,0.8);
+    animation: slideRight 4s ease-in-out infinite alternate;
+  }
+
+/* =========================================
+   PARAGRAPHE ANIME
+========================================= */
+
+    .slide-text {
+
+        font-size: 1.5rem;
+        margin-top: 15px;
+        opacity: 0;
+        transform: translateX(-200px);
+        animation: slideRight 4s ease-in-out infinite alternate;
+        animation-delay: 0.5s;
+    }
+
+/* =========================================
+   KEYFRAMES
+========================================= */
+
+    @keyframes slideRight {
+
+        0% {
+            opacity: 0;
+            transform: translateX(-200px);
+        }
+        50% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        100% {
+        opacity: 0.8;
+        transform: translateX(150px);
+       }
+    }
+
+    .hero-overlay h1 {
+        font-size: 4rem;
+        font-weight: bold;
+    }
+
+    .hero-overlay p {
+        font-size: 1.5rem;
+    }

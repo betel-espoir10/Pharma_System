@@ -1,0 +1,75 @@
+<%- include("../partials/header") %>
+
+<div class="container my-5">
+  <div class="card shadow">
+        <!-- <div class="flex-d my-2">
+          <a href="/roles/addRole" class="btn btn-success me-2">
+            <i class="bi bi-plus-circle"></i> Ajouter Role
+          </a>      
+        </div> -->
+    <div class="card-header bg-primary text-white">
+      <h4 class="text-center fw-bold"> Ajouter un utilisateur</h4>        
+    </div>
+
+    <div class="card-body">
+
+      <!-- FLASH MESSAGE -->
+      <% if (error.length > 0) { %>
+        <div class="alert alert-danger"><%= error %></div>
+      <% } %>
+
+      <form action="/users/addUser" method="POST">
+
+        <!-- NAME -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Nom de l'utilisateur :</label>
+          <input type="text" name="name" class="form-control" required>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="mb-3">
+          <label class="form-label fw-bold"">Email :</label>
+           <input type="email" name="email" class="form-control" required>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="mb-3">
+          <label class="form-label fw-bold"">Mot de passe :</label>
+           <input type="password" name="password" class="form-control" required>
+        </div>
+
+         <!-- STATUS -->
+        <div class="mb-3">
+          <label class="form-label fw-bold"">Status:</label>
+          <select name="status" class="form-select">
+             <option value="ACTIVE"> Actif </option>
+             <option value="INACTIVE"> Inactif </option>
+        </select>
+        </div>
+
+        <!-- ROLE -->
+        <div class="mb-3">
+          <label class="form-label fw-bold"">Role :</label>
+          <select name="roleId" class="form-select" required>
+            <option value="">-- Choisir un role --</option>
+
+                  <% if (roles && roles.length > 0) { %>
+                        <% roles.forEach(role => { %>
+                            <option value="<%= role.id %>"><%= role.name %></option>
+                        <% }) %>
+                     <% } %>
+          </select>
+        </div>
+
+        <!-- BUTTON -->
+        <button type="submit" class="btn btn-success">
+          ✅ Enregistrer
+        </button>
+
+        <a href="/users/listUser" class="btn btn-secondary">
+          ⬅️ Retour
+        </a>
+      </form>
+    </div>
+  </div>
+</div>

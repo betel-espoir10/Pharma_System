@@ -1,0 +1,137 @@
+<%- include("../partials/header") %>
+
+
+<div class="main-content p-4">
+
+    <div class="container-fluid">
+
+        <div class="card shadow border-0">
+
+            <div class="card-header bg-warning text-dark">
+
+                <h4 class="mb-0">
+
+                    <i class="fa fa-edit"></i>
+                    Modifier Achat
+
+                </h4>
+
+            </div>
+
+            <div class="card-body">
+
+                <form action="/purchases/editPurchase/<%= purchase.id %>"
+                      method="POST">
+
+                    <!-- MODE PAIEMENT -->
+                    <div class="mb-3">
+
+                        <label class="form-label fw-bold">
+                            Mode Paiement
+                        </label>
+
+                        <select name="paymentMethod"
+                                class="form-select">
+
+                            <option value="CASH"
+                            <%= purchase.paymentMethod === 'CASH' ? 'selected' : '' %>>
+
+                                Cash
+
+                            </option>
+
+                            <option value="BANK"
+                            <%= purchase.paymentMethod === 'BANK' ? 'selected' : '' %>>
+
+                                Banque
+
+                            </option>
+
+                            <option value="MOBILE_MONEY"
+                            <%= purchase.paymentMethod === 'MOBILE_MONEY' ? 'selected' : '' %>>
+
+                                Mobile Money
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- STATUT -->
+                    <div class="mb-3">
+
+                        <label class="form-label fw-bold">
+                            Statut Paiement
+                        </label>
+
+                        <select name="paymentStatus"
+                                class="form-select">
+
+                            <option value="PAID"
+                            <%= purchase.paymentStatus === 'PAID' ? 'selected' : '' %>>
+
+                                Payé
+
+                            </option>
+
+                            <option value="PARTIAL"
+                            <%= purchase.paymentStatus === 'PARTIAL' ? 'selected' : '' %>>
+
+                                Partiel
+
+                            </option>
+
+                            <option value="PENDING"
+                            <%= purchase.paymentStatus === 'PENDING' ? 'selected' : '' %>>
+
+                                En attente
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- NOTES -->
+                    <div class="mb-3">
+
+                        <label class="form-label fw-bold">
+                            Notes
+                        </label>
+
+                        <textarea name="notes"
+                                  rows="4"
+                                  class="form-control"><%= purchase.notes %></textarea>
+
+                    </div>
+
+
+
+                    <!-- BUTTON -->
+                    <div class="text-end">
+
+                        <button type="submit"
+                                class="btn btn-warning px-5">
+
+                            <i class="fa fa-save"></i>
+                            Mettre à jour
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

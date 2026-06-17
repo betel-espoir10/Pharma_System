@@ -1,0 +1,309 @@
+<%- include("../partials/header") %>
+
+<div class="main-content p-4">
+
+    <div class="container-fluid">
+
+        <!-- PAGE TITLE -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <h2 class="fw-bold">
+                <i class="fa fa-cart-plus text-primary"></i>
+                Nouvel Achat
+            </h2>
+
+            <a href="/purchases/listPurchase"
+               class="btn btn-dark">
+
+                <i class="fa fa-list"></i>
+                Liste Achats
+
+            </a>
+
+        </div>
+
+
+
+        <!-- CARD -->
+        <div class="card shadow border-0">
+
+            <div class="card-body">
+
+                <form action="/purchases/addPurchase"
+                      method="POST">
+
+                    <div class="row">
+
+                        <!-- FOURNISSEUR -->
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label fw-bold">
+                                Fournisseur
+                            </label>
+
+                            <select name="supplierId"
+                                    class="form-select"
+                                    required>
+
+                                <option value="">
+                                    -- Choisir fournisseur --
+                                </option>
+
+                                <% suppliers.forEach(supplier => { %>
+
+                                    <option value="<%= supplier.id %>">
+
+                                        <%= supplier.name %>
+
+                                    </option>
+
+                                <% }) %>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- MEDICAMENT -->
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label fw-bold">
+                                Médicament
+                            </label>
+
+                            <select name="drugId"
+                                    class="form-select"
+                                    required>
+
+                                <option value="">
+                                    -- Choisir médicament --
+                                </option>
+
+                                <% drugs.forEach(drug => { %>
+
+                                    <option value="<%= drug.id %>">
+
+                                        <%= drug.name %>
+
+                                    </option>
+
+                                <% }) %>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- QUANTITE -->
+                        <div class="col-md-4 mb-3">
+
+                            <label class="form-label fw-bold">
+                                Quantité
+                            </label>
+
+                            <input type="number"
+                                   name="quantity"
+                                   id="quantity"
+                                   class="form-control"
+                                   required>
+
+                        </div>
+
+
+
+                        <!-- PRIX ACHAT -->
+                        <div class="col-md-4 mb-3">
+
+                            <label class="form-label fw-bold">
+                                Prix Achat
+                            </label>
+
+                            <input type="number"
+                                   step="0.01"
+                                   name="purchasePrice"
+                                   id="purchasePrice"
+                                   class="form-control"
+                                   required>
+
+                        </div>
+
+
+
+                        <!-- PRIX VENTE -->
+                        <div class="col-md-4 mb-3">
+
+                            <label class="form-label fw-bold">
+                                Prix Vente
+                            </label>
+
+                            <input type="number"
+                                   step="0.01"
+                                   name="sellingPrice"
+                                   class="form-control"
+                                   required>
+
+                        </div>
+
+
+
+                        <!-- DATE EXPIRATION -->
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label fw-bold">
+                                Date Expiration
+                            </label>
+
+                            <input type="date"
+                                   name="expirationDate"
+                                   class="form-control"
+                                   required>
+
+                        </div>
+
+
+
+                        <!-- MODE PAIEMENT -->
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label fw-bold">
+                                Mode Paiement
+                            </label>
+
+                            <select name="paymentMethod"
+                                    class="form-select">
+
+                                <option value="CASH">
+                                    Cash
+                                </option>
+
+                                <option value="BANK">
+                                    Banque
+                                </option>
+
+                                <option value="MOBILE_MONEY">
+                                    Mobile Money
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- MONTANT PAYE -->
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label fw-bold">
+                                Montant Payé
+                            </label>
+
+                            <input type="number"
+                                   step="0.01"
+                                   name="paidAmount"
+                                   class="form-control"
+                                   required>
+
+                        </div>
+
+
+
+                        <!-- TOTAL -->
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label fw-bold">
+                                Total Achat
+                            </label>
+
+                            <input type="number"
+                                   id="totalAmount"
+                                   class="form-control bg-light"
+                                   readonly>
+
+                        </div>
+
+
+
+                        <!-- NOTES -->
+                        <div class="col-12 mb-3">
+
+                            <label class="form-label fw-bold">
+                                Notes
+                            </label>
+
+                            <textarea name="notes"
+                                      rows="4"
+                                      class="form-control"></textarea>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- BUTTON -->
+                    <div class="text-end">
+
+                        <button type="submit"
+                                class="btn btn-primary px-5">
+
+                            <i class="fa fa-save"></i>
+                            Enregistrer Achat
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- JS CALCUL TOTAL -->
+<script>
+
+const quantity =
+document.getElementById("quantity");
+
+const purchasePrice =
+document.getElementById("purchasePrice");
+
+const totalAmount =
+document.getElementById("totalAmount");
+
+
+
+function calculateTotal() {
+
+    const qty =
+    parseFloat(quantity.value) || 0;
+
+    const price =
+    parseFloat(purchasePrice.value) || 0;
+
+    totalAmount.value =
+    (qty * price).toFixed(2);
+}
+
+
+
+quantity.addEventListener(
+    "input",
+    calculateTotal
+);
+
+purchasePrice.addEventListener(
+    "input",
+    calculateTotal
+);
+
+</script>
+

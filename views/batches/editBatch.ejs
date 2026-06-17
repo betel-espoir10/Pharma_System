@@ -1,0 +1,83 @@
+<%- include("../partials/header") %>
+
+<div class="container mt-5">
+  <div class="card shadow">
+
+    <div class="card-header bg-warning">
+      <h4 class="text-center fw-bold">✏️ Modifier un lot de médicament</h4>
+    </div>
+
+    <div class="card-body">
+
+      <% if (error && error.length > 0) { %>
+        <div class="alert alert-danger"><%= error %></div>
+      <% } %>
+
+      <form action="/batches/edit/<%= batch.id %>" method="POST">
+
+        <!-- NUMERO DU LOT -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Numéro du Lot :</label>
+          <input type="text" name="batchNumber" class="form-control"
+                 value="<%= batch.batchNumber %>" required>
+        </div>
+
+        <!-- NOM DU MEDICAMENT -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Nom du médicament :</label>
+          <select name="drugId" class="form-select" required> 
+            <% drugs.forEach(drug => { %>
+              <option value="<%= drug.id %>"
+                <%= drug.drugId === drug.id ? "selected" : "" %>>
+                <%= drug.name %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+
+         <!-- QUANTITE -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Quantité Iniale:</label>
+          <input type="number"  name="quantity"
+                 class="form-control"
+                 value="<%= batch.quantity %>" required>
+        </div>
+
+         <!-- STOCK RESTANT -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Stock restant:</label>
+          <input type="number"  name="remainingStock"
+                 class="form-control"
+                 value="<%= batch.remainingStock %>" required>
+        </div>
+
+        <!-- PRIX D'ACHAT -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Prix d'achat :</label>
+          <input type="number"  name="purchasePrice"
+                 class="form-control"
+                 value="<%= batch.purchasePrice %>" required>
+        </div>
+
+        <!-- PRIX DE VENTE -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Prix de vente :</label>
+          <input type="number"  name="sellingPrice"
+                 class="form-control"
+                 value="<%= batch.sellingPrice %>" required>
+        </div>
+
+        <!--DATE D'EXPIRATION -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Date d'expiration :</label>
+          <input type="date"  name="expirationDate"
+                 class="form-control"
+                 value="<%= batch.expirationDate %>" required>
+        </div>
+        <!-- BUTTONS -->
+        <button class="btn btn-success">💾 Mettre à jour</button>
+        <a href="/batches/listBatch" class="btn btn-secondary">⬅️ Retour</a>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<%- include("../partials/header") %>
+
+<div class="container my-5">
+  <div class="card shadow">
+    
+    <div class="card-header bg-primary text-white">
+      <h4 class="text-center fw-bold">💊 Ajouter un Lot de Médicament</h4> 
+    </div>
+
+    <div class="card-body">
+
+      <!-- FLASH MESSAGE -->
+      <% if (error.length > 0) { %>
+        <div class="alert alert-danger"><%= error %></div>
+      <% } %>
+
+      <form action="/batches/addBatch" method="POST">
+
+        <!-- BATCHNUMBER -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Numéro du Lot :</label>
+          <input type="text" name="batchNumber" class="form-control" required>
+        </div>
+
+        <!-- DRUGID -->
+        <div class="mb-3">
+          <label class="form-label fw-bold"">Nom du Médicament :</label>
+         <select name="drugId" class="form-select" required>
+            <option value="">-- Choisir un médicament --</option>
+                  <% if (drugs && drugs.length > 0) { %>
+                        <% drugs.forEach(drug => { %>
+                            <option value="<%= drug.id %>"><%= drug.name %></option>
+                        <% }) %>
+                     <% } %>
+          </select>
+        </div>
+
+        <!-- QUANTITY -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Quantité :</label>
+          <input type="number" name="quantity" min="1" class="form-control" required>
+        </div>
+
+        <!-- ALERT THRESHOLD -->
+        <div class="mb-3">
+          <label class="form-label fw-bold"> Seuil d'Alerte Stock Faible :</label>
+          <input type="number" name="alertThreshold" class="form-control" value="10" min="1" required >
+          <small class="text-muted">
+            Une alerte sera déclenchée lorsque le stock restant sera inférieur à cette valeur.
+          </small>
+        </div>
+
+        <!-- PURCHASEPRICE -->
+        <div class="mb-3">
+          <label class="form-label fw-bold"">Prix d'Achat :</label>
+          <input type="number" name="purchasePrice" min="1" class="form-control" required>
+        </div>
+
+        <!-- SELLINGPRICE -->
+        <div class="mb-3">
+          <label class="form-label fw-bold"">Prix de Vente :</label>
+          <input type="number" name="sellingPrice" min="1" class="form-control" required>
+        </div>
+
+        <!-- EXPIRATIONDATE -->
+        <div class="mb-3">
+          <label class="form-label fw-bold"">Date d'Expiration :</label>
+          <input type="date" name="expirationDate" class="form-control" required>
+          <small class="text-muted">
+            Vérifiez bien la date d'expiration du fournisseur.
+          </small>
+        </div>
+
+        <!-- BUTTON -->
+        <button type="submit" class="btn btn-success">
+          ✅ Enregistrer
+        </button>
+
+        <a href="/batches/listBatch" class="btn btn-secondary">
+          ⬅️ Retour
+        </a>
+
+      </form>
+
+    </div>
+  </div>
+</div>

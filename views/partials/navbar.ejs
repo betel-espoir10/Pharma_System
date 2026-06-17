@@ -1,0 +1,16 @@
+<!-- 🔝 NAVBAR -->
+    <nav class="navbar navbar-dark bg-dark px-3">
+      <button class="btn btn-outline-light" id="toggleSidebar">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <span class="navbar-brand ms-3">💊 Pharma System</span>
+
+      <div class="ms-auto d-flex align-items-center">
+        <span class="text-white me-3">
+          <i class="bi bi-person-circle"></i> <%= user ? user.name : "Guest" %>
+        </span>
+
+        <a href="/logout" class="btn btn-danger btn-sm">Déconnexion</a>
+      </div>
+    </nav>

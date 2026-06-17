@@ -1,0 +1,31 @@
+<%- include("../partials/header") %>
+
+<div class="container my-5">
+  <div class="card shadow">  
+    <div class="card-header bg-primary text-white">
+      <h4 class="text-center fw-bold"> Ajouter un Role</h4>
+    </div>
+    <div class="card-body">
+      <!-- FLASH MESSAGE -->
+      <% if (error.length > 0) { %>
+        <div class="alert alert-danger"><%= error %></div>
+      <% } %>
+
+      <form action="/roles/addRole" method="POST">
+
+        <!-- NAME -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Role :</label>
+          <input type="text" name="name" class="form-control" required>
+        </div>
+        <!-- BUTTON -->
+        <button type="submit" class="btn btn-success">
+          ✅ Enregistrer
+        </button>
+        <a href="/users/listUser" class="btn btn-secondary">
+          ⬅️ Retour
+        </a>
+      </form>
+    </div>
+  </div>
+</div>

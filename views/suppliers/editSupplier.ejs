@@ -1,0 +1,49 @@
+<%- include("../partials/header") %>
+
+
+<div class="container mt-5">
+  <div class="card shadow">
+
+    <div class="card-header bg-warning">
+      <h4 class="text-center fw-bold">✏️ Editer le fournisseur</h4>
+    </div>
+
+    <div class="card-body">
+ 
+      <% if (error && error.length > 0) { %>
+        <div class="alert alert-danger"><%= error %></div>
+      <% } %>
+
+      <form action="/suppliers/edit/<%= supp.id %>" method="POST">
+
+        <!-- NAME -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Nom du fournisseur :</label>
+          <input type="text" name="name" class="form-control"
+                 value="<%= supp.name %>" required>
+        </div>
+
+        <!-- PHONE -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Phone :</label>
+          <input type="tel" name="phone" class="form-control"
+                 value="<%= supp.phone %>" required>
+        </div>
+
+
+        <!-- ADDRESS -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Address :</label>
+          <input type="text" name="address" class="form-control"
+                 value="<%= supp.address %>" required>
+        </div>
+
+        <!-- BUTTONS -->
+        <button class="btn btn-success">💾 Mettre à jour</button>
+        <a href="/suppliers/listSupplier" class="btn btn-secondary">⬅️ Retour</a>
+
+      </form>
+
+    </div>
+  </div>
+</div>

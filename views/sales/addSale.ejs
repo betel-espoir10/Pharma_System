@@ -1,0 +1,220 @@
+<%- include("../partials/header") %>
+
+
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3> Nouvelle Vente </h3>
+    </div>
+    <div class="card-body">
+      <form action="/sales/addSale" method="POST">
+        <div class="row">
+          <!-- CLIENT -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label fw-bold">
+              Client
+            </label>
+            <select name="customerId"
+                    class="form-select"
+                    required>
+              <option value="">
+                -- Choisir client --
+              </option>
+              <% customers.forEach(customer => { %>
+                <option value="<%= customer.id %>">
+                  <%= customer.name %>
+                </option>
+              <% }) %>
+            </select>
+          </div>
+
+          <!-- PAIEMENT -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label fw-bold">
+              Méthode paiement
+            </label>
+            <select name="paymentMethod"
+                    class="form-select">
+              <option value="CASH">
+                Cash
+              </option>
+
+              <option value="MOBILE_MONEY">
+                Mobile Money
+              </option>
+              <option value="CARD">
+                Carte
+              </option>
+              <option value="BANK">
+                Banque
+              </option>
+            </select>
+          </div>
+        </div>
+        <hr>
+
+        <!-- PRODUITS -->
+        <h5 class="mb-3">
+          Médicaments
+        </h5>
+
+        <table class="table table-bordered">
+
+          <thead class="table-dark">
+
+            <tr>
+              <th>Médicament</th>
+              <th>Lot</th>
+              <th>Qté</th>
+              <th>Prix</th>
+              <th>Sous-total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <!-- DRUG -->
+              <td>
+                <select name="drugId" class="form-select">
+                  <% drugs.forEach(drug => { %>
+                    <option value="<%= drug.id %>">
+                      <%= drug.name %>
+                    </option>
+                  <% }) %>
+                </select>
+              </td>
+
+              <!-- BATCH -->
+              <td>
+                <select name="batchId"
+                        class="form-select">
+                  <% batches.forEach(batch => { %>
+                    <option value="<%= batch.id %>">
+                      <%= batch.batchNumber %>
+                    </option>
+                  <% }) %>
+                </select>
+              </td>
+
+              <!-- QTY -->
+              <td>
+                <input type="number"
+                       name="quantity"
+                       class="form-control quantity"
+                       min="1">
+              </td>
+
+              <!-- PRICE -->
+              <td>
+                <input type="number"
+                       name="unitPrice"
+                       class="form-control unitPrice">
+              </td>
+
+              <!-- SUBTOTAL -->
+              <td>
+                <input type="number"
+                       name="subtotal"
+                       class="form-control subtotal"
+                       readonly>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      <hr>
+        <!-- TOTAL -->
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label>Total</label>
+            <input type="number"
+                   name="totalAmount"
+                   class="form-control"
+                   id="totalAmount" readonly>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <label>Réduction</label>
+            <input type="number"
+                   name="discount"
+                   class="form-control"
+                   value="0">
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <label>Taxe</label>
+            <input type="number"
+                   name="tax"
+                   class="form-control"
+                   value="0">
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <label>Montant payé</label>
+            <input type="number"
+             name="paidAmount"
+             class="form-control">
+          </div>
+        </div>
+
+        <!-- NOTES -->
+        <div class="mb-3">
+          <label>Notes</label>
+          <textarea name="notes" class="form-control"></textarea>
+        </div>
+         <!-- BUTTON -->
+        <button type="submit" class="btn btn-success"> Enregistrer Vente </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- CALCUL AUTOMATIQUE SUBTOTAL ET TOTAL -->
+
+    <script>
+      const quantityInputs = document.querySelectorAll(".quantity");
+
+      const priceInputs = document.querySelectorAll(".unitPrice");
+
+      const subtotalInputs = document.querySelectorAll(".subtotal");
+
+      const totalAmount = document.querySelector("#totalAmount");
+
+      function calculateTotals() {
+        let grandTotal = 0;
+
+        quantityInputs.forEach((qtyInput, index) => {
+          const qty = parseFloat(qtyInput.value) || 0;
+          const price = parseFloat(priceInputs[index].value) || 0;
+          const subtotal = qty * price;
+          subtotalInputs[index].value = subtotal.toFixed(2);
+          grandTotal += subtotal;
+        });
+
+        totalAmount.value = grandTotal.toFixed(2);
+      }
+      // EVENTS
+      quantityInputs.forEach(input => {
+        input.addEventListener(
+          "input",
+          calculateTotals
+        );
+      });
+      priceInputs.forEach(input => {
+        input.addEventListener(
+          "input",
+          calculateTotals
+        );
+      });
+    </script>
+
+  <script>
+      const paymentMethod = document.getElementById("paymentMethod");
+      const total_amount = document.getElementById("totalAmount");
+      const paidAmount = document.getElementById("paidAmount");
+
+      paymentMethod.addEventListener("change", function () {
+      if (this.value === "CASH") {
+            paidAmount.value = total_amount.value;
+        }
+      });
+  </script>

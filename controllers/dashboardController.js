@@ -1,0 +1,145 @@
+const { Drug, Sale, Purchase, Batch, Customer, Supplier} = require("../models");
+const { Op } = require("sequelize");
+
+
+// DASHBOARD ANALYTIQUE SaaS
+
+exports.dashboard = async (req, res) => {
+  try {
+
+// DATE DU JOUR
+    const today = new Date();
+
+    const startOfDay =
+      new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate()
+      );
+
+// PREMIER JOUR DU MOIS
+    const startOfMonth =
+      new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        1
+      );
+
+// TOTAL MEDICAMENTS
+    const totalDrugs = await Drug.count();
+
+// TOTAL CLIENTS
+    const totalCustomers = await Customer.count();
+
+// TOTAL FOURNISSEURS
+    const totalSuppliers = await Supplier.count();
+
+// TOTAL VENTES
+    const totalSales = await Sale.sum("totalAmount") || 0;
+
+ // TOTAL ACHATS
+    const totalPurchases = await Purchase.sum("totalAmount") || 0;
+
+// BENEFICE
+    const profit =  totalSales - totalPurchases;
+
+// VENTES DU JOUR
+    const todaySales = await Sale.sum("totalAmount", {
+        where: {
+          createdAt: {
+            [Op.gte]: startOfDay
+          }
+        }
+      }) || 0;
+
+
+// ACHATS DU MOIS
+    const monthlyPurchases = await Purchase.sum("totalAmount", {
+        where: {
+          createdAt: {
+            [Op.gte]: startOfMonth
+          }
+        }
+      }) || 0;
+
+// STOCK FAIBLE
+    const lowStockBatches = await Batch.findAll({
+        where: {
+          remainingStock: {
+            [Op.lte]: 10
+          }
+        },
+        include: [Drug]
+      });
+
+ // PRODUITS EXPIRES
+    const expiredBatches = await Batch.findAll({
+        where: {
+          expirationDate: {
+            [Op.lt]: new Date()
+          }
+        },
+        include: [Drug]
+      });
+
+
+// PRODUITS EXPIRANT BIENTOT
+    const next30Days = new Date();
+
+    next30Days.setDate(
+      next30Days.getDate() + 30
+    );
+
+    const expiringSoon = await Batch.findAll({
+
+        where: {
+          expirationDate: {
+            [Op.between]: [
+              new Date(),
+              next30Days
+            ]
+          }
+        },
+        include: [Drug]
+      });
+
+// DERNIERES VENTES
+    const recentSales = await Sale.findAll({
+        limit: 5,
+        order: [
+          ["createdAt", "DESC"]
+        ]
+      });
+
+// DERNIERS ACHATS
+    const recentPurchases = await Purchase.findAll({
+        limit: 5,
+        order: [
+          ["createdAt", "DESC"]
+        ]
+      });
+
+// RENDER
+  
+    res.render("dashboard/index", {
+
+      totalDrugs,
+      totalCustomers,
+      totalSuppliers,
+      totalSales,
+      totalPurchases,
+      profit,
+      todaySales,
+      monthlyPurchases,
+      lowStockBatches,
+      expiredBatches,
+      expiringSoon,
+      recentSales,
+      recentPurchases
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).render("errors/500");
+  }
+};
