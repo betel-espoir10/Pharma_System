@@ -40,7 +40,6 @@
           <input
               type="tel"
               id="phone"
-              name="phone"
               class="form-control"
               required
             >
@@ -48,8 +47,9 @@
               type="hidden"
               id="fullPhone"
               name="phone"
-            >
+            >        
         </div>
+        
         <!-- ADRESS -->
         <div class="mb-3">
           <label class="form-label fw-bold"">Adresse :</label>
@@ -69,38 +69,20 @@
 </div>
 <!-- JS -->
 
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/js/intlTelInput.min.js"></script>
-
+ <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/js/intlTelInput.min.js"></script>
 <script>
+  document.addEventListener("DOMContentLoaded", function () {
 
-document.addEventListener("DOMContentLoaded", function () {
-    const phoneInput =
-        document.querySelector("#phone");
-    const iti =
-        window.intlTelInput(phoneInput, {
-            initialCountry: "rw",
-            preferredCountries: [
-                "rw",
-                "cd",
-                "fr",
-                "us",
-                "ca"
-            ],
-            separateDialCode: true,
-            autoPlaceholder: "polite",
-            nationalMode: false,
-            formatOnDisplay: true,
-            utilsScript:
-              "https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/js/utils.js"
-
-        });
-
-    const form = phoneInput.closest("form");
-      form.addEventListener("submit", function () {
-      const fullNumber = iti.getNumber();
-      console.log("NUMERO ENVOYE :", fullNumber);
-      document.getElementById("fullPhone").value = fullNumber;
+    const phoneInput = document.querySelector("#phone");
+    const iti = window.intlTelInput(phoneInput, {
+        initialCountry: "td",
+        separateDialCode: true
+    });
+    const form = document.querySelector("form");
+    form.addEventListener("submit", function () {
+        document.getElementById("fullPhone").value =
+            iti.getSelectedCountryData().dialCode +
+            phoneInput.value;
     });
 });
-
 </script>
