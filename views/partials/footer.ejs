@@ -36,7 +36,21 @@
         sidebar.classList.toggle("collapsed");
         content.classList.toggle("expanded");
       });
-    </script>       
+    </script> 
+    
+    <!-- Script flash Message Alerte -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const alerts = document.querySelectorAll(".flash-alert");
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.remove();
+                }, 3000);
+            });
+        });
+    </script>
 
 </body>
 </html>
