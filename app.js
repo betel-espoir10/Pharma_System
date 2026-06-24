@@ -61,7 +61,8 @@ app.use(helmet({
             ],
             imgSrc: [
                "'self'",
-               "data:"
+               "data:",
+               "https://cdn.jsdelivr.net",
             ],
             connectSrc: [
                "'self'",

@@ -26,14 +26,15 @@ exports.showAddForm = async (req, res) => {
 // STORE
 exports.store = async (req, res) => {
   try {
+    console.log("DONNEES REÇUES :", req.body);
     const { name, phone, address } = req.body;
-
+    
     await Customer.create({
       name,
       phone,
       address,
     });
-
+    
     req.flash("success", "Client ajouté avec succès");
     res.redirect("/customers/listCustomer");
   } catch (error) {
@@ -41,6 +42,7 @@ exports.store = async (req, res) => {
     req.flash("error", "Erreur lors de l'ajout");
     res.redirect("/customers/listCustomer");
   }
+
 };
 
 // FORM EDIT
