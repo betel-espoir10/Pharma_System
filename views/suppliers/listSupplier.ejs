@@ -20,12 +20,16 @@
 
   <!-- FLASH -->
   <% if (success && success.length > 0) { %>
-    <div class="alert alert-success text-center"><%= success %></div>
-  <% } %>
+      <div id="flash-success" class="flash-alert flash-success">
+        ✅ <%= success %>
+      </div>
+    <% } %>
 
-  <% if (error && error.length > 0) { %>
-    <div class="alert alert-danger text-center"><%= error %></div>
-  <% } %>
+    <% if (error && error.length > 0) { %>
+      <div id="flash-error" class="flash-alert flash-error">
+        ❌ <%= error %>
+      </div>
+    <% } %>
 
   <div class="card shadow">
     <div class="card-body">

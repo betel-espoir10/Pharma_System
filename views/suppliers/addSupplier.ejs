@@ -45,7 +45,7 @@
               id="fullPhone"
               name="phone"
         </div>
-        
+
         <!-- ADRESS -->
         <div class="mb-3">
           <label class="form-label fw-bold"">Adresse :</label>
@@ -78,6 +78,7 @@
         const form = document.querySelector("form");
         form.addEventListener("submit", function () {
             document.getElementById("fullPhone").value =
+                "+" +
                 iti.getSelectedCountryData().dialCode +
                 phoneInput.value;
         });
