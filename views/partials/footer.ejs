@@ -41,15 +41,19 @@
     <!-- Script flash Message Alerte -->
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
 
-            const alerts = document.querySelectorAll(".flash-alert");
-            alerts.forEach(alert => {
-                setTimeout(() => {
-                    alert.remove();
-                }, 3000);
-            });
+        document.addEventListener("DOMContentLoaded",()=>{
+            const flash=document.querySelector(".flash-message");
+            if(!flash) return;
+            setTimeout(()=>{
+                flash.remove();
+            },3000);
+            const close=flash.querySelector(".flash-close");
+            if(close){
+                close.onclick=()=>flash.remove();
+            }
         });
+
     </script>
 
 </body>

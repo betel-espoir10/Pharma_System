@@ -1,0 +1,67 @@
+<!-- ================= FLASH NOTIFICATIONS ================= -->
+
+<% if(success && success.length > 0){ %>
+
+<div class="flash-message flash-success">
+
+    <div class="flash-icon">
+        <i class="fa-solid fa-circle-check"></i>
+    </div>
+    <div class="flash-content">
+        <%= success %>
+    </div>
+    <button class="flash-close">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+</div>
+
+<% } %>
+
+
+<% if(error && error.length > 0){ %>
+
+<div class="flash-message flash-error">
+    <div class="flash-icon">
+        <i class="fa-solid fa-circle-xmark"></i>
+    </div>
+    <div class="flash-content">
+        <%= error %>
+    </div>
+    <button class="flash-close">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+</div>
+<% } %>
+
+
+<% if(info && info.length > 0){ %>
+
+<div class="flash-message flash-info">
+    <div class="flash-icon">
+        <i class="fa-solid fa-circle-info"></i>
+    </di
+    <div class="flash-content">
+        <%= info %>
+    </div>
+    <button class="flash-close">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+</div>
+<% } %>
+
+<% if(warning && warning.length > 0){ %>
+
+<div class="flash-message flash-warning">
+
+    <div class="flash-icon">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+    </div>
+    <div class="flash-content">
+        <%= warning %>
+    </div>
+    <button class="flash-close">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+</div>
+
+<% } %>
