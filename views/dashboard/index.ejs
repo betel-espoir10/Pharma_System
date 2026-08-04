@@ -6,6 +6,47 @@
 
     <%- include("../partials/dashboard/stats") %>
 
+    <%- include("../partials/dashboard/charts") %>
+
 </div>
+
+//Injecter les KPI pour le Doughnut
+
+ <script>
+
+const salesLabels = [];
+const salesData = [];
+
+window.totalRevenue = <%= totalRevenue %>;
+window.totalPurchases = <%= totalPurchases %>;
+window.profit = <%= profit %>;
+
+</script>
+
+<script>
+
+window.dashboardData = {
+
+    salesLabels:
+        <%- JSON.stringify(salesLabels || []) %>,
+
+    salesData:
+        <%- JSON.stringify(salesData || []) %>,
+
+    purchaseData:
+        <%- JSON.stringify(purchaseData || []) %>,
+
+    totalRevenue:
+        <%= totalRevenue || 0 %>,
+
+    totalPurchases:
+        <%= totalPurchases || 0 %>,
+
+    profit:
+        <%= profit || 0 %>
+
+};
+
+</script>
 
 <%- include("../partials/footer") %>

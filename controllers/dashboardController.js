@@ -125,8 +125,107 @@ exports.dashboard = async (req, res) => {
         ]
       });
 
-// RENDER
-  
+// VENTES DES 7 DERNIERS JOURS
+
+const salesLabels = [];
+const salesData = [];
+
+for(let i = 6; i >= 0; i--){
+
+    const day = new Date();
+    day.setDate(day.getDate() - i);
+
+    const startDay = new Date(
+        day.getFullYear(),
+        day.getMonth(),
+        day.getDate()
+    );
+
+    const endDay = new Date(
+        day.getFullYear(),
+        day.getMonth(),
+        day.getDate() + 1
+    );
+
+    const amount =
+        await Sale.sum("totalAmount",{
+            where:{
+                createdAt:{
+                    [Op.gte]: startDay,
+                    [Op.lt]: endDay
+                }
+            }
+        }) || 0;
+
+    salesLabels.push(
+        day.toLocaleDateString("fr-FR",{
+            weekday:"short"
+        })
+    );
+
+    salesData.push(amount);
+
+}   
+
+// ==============================
+// DONNEES POUR CHART.JS
+// ==============================
+
+const purchaseData = [];
+
+for (let i = 6; i >= 0; i--) {
+
+    const currentDay = new Date();
+
+    currentDay.setDate(currentDay.getDate() - i);
+
+    const startDay = new Date(
+        currentDay.getFullYear(),
+        currentDay.getMonth(),
+        currentDay.getDate()
+    );
+
+    const endDay = new Date(
+        currentDay.getFullYear(),
+        currentDay.getMonth(),
+        currentDay.getDate() + 1
+    );
+
+    // VENTES DU JOUR
+
+    const daySales =
+        await Sale.sum("totalAmount", {
+            where: {
+                createdAt: {
+                    [Op.gte]: startDay,
+                    [Op.lt]: endDay
+                }
+            }
+        }) || 0;
+
+    // ACHATS DU JOUR
+
+    const dayPurchases =
+        await Purchase.sum("totalAmount", {
+            where: {
+                createdAt: {
+                    [Op.gte]: startDay,
+                    [Op.lt]: endDay
+                }
+            }
+        }) || 0;
+
+    salesLabels.push(
+        currentDay.toLocaleDateString("fr-FR", {
+            weekday: "short"
+        })
+    );
+
+    salesData.push(daySales);
+    purchaseData.push(dayPurchases);
+}
+
+// RENDER 
     res.render("dashboard/index", {
 
     // KPI
@@ -139,7 +238,12 @@ exports.dashboard = async (req, res) => {
     totalCustomers,
     totalSuppliers,
     totalUsers,
-
+    
+    //Ventes et Achats
+    salesLabels,
+    salesData,
+    purchaseData,
+    
     // Alertes
     lowStockBatches,
     expiredBatches,
