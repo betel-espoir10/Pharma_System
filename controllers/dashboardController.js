@@ -1,4 +1,4 @@
-const { Drug, Sale, Purchase, Batch, Customer, Supplier} = require("../models");
+const { Drug, Sale, Purchase, Batch, Customer, Supplier, User} = require("../models");
 const { Op } = require("sequelize");
 
 
@@ -33,6 +33,12 @@ exports.dashboard = async (req, res) => {
 
 // TOTAL FOURNISSEURS
     const totalSuppliers = await Supplier.count();
+
+// TOTAL USERS
+    const totalUsers = await User.count();
+
+// TOTAL STOCK
+    const totalStock = await Batch.sum("remainingStock") || 0;
 
 // TOTAL VENTES
     const totalSales = await Sale.sum("totalAmount") || 0;
@@ -123,19 +129,29 @@ exports.dashboard = async (req, res) => {
   
     res.render("dashboard/index", {
 
-      totalDrugs,
-      totalCustomers,
-      totalSuppliers,
-      totalSales,
-      totalPurchases,
-      profit,
-      todaySales,
-      monthlyPurchases,
-      lowStockBatches,
-      expiredBatches,
-      expiringSoon,
-      recentSales,
-      recentPurchases
+    // KPI
+    totalRevenue: totalSales,
+    profit,
+    totalSales,
+    totalPurchases,
+    totalDrugs,
+    totalStock,
+    totalCustomers,
+    totalSuppliers,
+    totalUsers,
+
+    // Alertes
+    lowStockBatches,
+    expiredBatches,
+    expiringSoon,
+
+    // Tableaux
+    recentSales,
+    recentPurchases,
+
+    // Session
+    user: req.session.user
+
     });
 
   } catch (error) {

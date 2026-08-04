@@ -1,0 +1,137 @@
+.hero-dashboard{
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+
+    color:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+}
+
+.hero-title{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+}
+
+.hero-subtitle{
+
+    font-size:1.2rem;
+
+    opacity:.9;
+
+}
+
+.hero-description{
+
+    opacity:.8;
+
+}
+
+.hero-date{
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+.hero-time{
+
+    font-size:32px;
+
+    font-weight:bold;
+
+}
+
+.dashboard-card{
+
+    color:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    transition:.3s;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.1);
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.dashboard-card h3{
+
+    font-size:2rem;
+
+    margin:10px 0;
+
+}
+
+.card-icon{
+
+    font-size:2rem;
+
+}
+
+.card-blue{
+
+    background:#2563eb;
+
+}
+
+.card-green{
+
+    background:#10b981;
+
+}
+
+.card-orange{
+
+    background:#f59e0b;
+
+}
+
+.card-red{
+
+    background:#ef4444;
+
+}
+
+.card-purple{
+
+    background:#8b5cf6;
+
+}
+
+.card-cyan{
+
+    background:#06b6d4;
+
+}
+
+.card-dark{
+
+    background:#374151;
+
+}
+
+.card-pink{
+
+    background:#ec4899;
+
+}

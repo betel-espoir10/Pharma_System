@@ -1,67 +1,42 @@
-<!-- ================= FLASH NOTIFICATIONS ================= -->
-
-<% if(success && success.length > 0){ %>
+<% if (typeof success !== "undefined" && success.length) { %>
 
 <div class="flash-message flash-success">
-
-    <div class="flash-icon">
-        <i class="fa-solid fa-circle-check"></i>
-    </div>
-    <div class="flash-content">
-        <%= success %>
-    </div>
-    <button class="flash-close">
-        <i class="fa-solid fa-xmark"></i>
-    </button>
+    <i class="fa-solid fa-circle-check"></i>
+    <span><%= success %></span>
+    <button class="flash-close">&times;</button>
 </div>
 
 <% } %>
 
 
-<% if(error && error.length > 0){ %>
+<% if (typeof error !== "undefined" && error.length) { %>
 
 <div class="flash-message flash-error">
-    <div class="flash-icon">
-        <i class="fa-solid fa-circle-xmark"></i>
-    </div>
-    <div class="flash-content">
-        <%= error %>
-    </div>
-    <button class="flash-close">
-        <i class="fa-solid fa-xmark"></i>
-    </button>
+    <i class="fa-solid fa-circle-xmark"></i>
+    <span><%= error %></span>
+    <button class="flash-close">&times;</button>
 </div>
+
 <% } %>
 
 
-<% if(info && info.length > 0){ %>
-
-<div class="flash-message flash-info">
-    <div class="flash-icon">
-        <i class="fa-solid fa-circle-info"></i>
-    </di
-    <div class="flash-content">
-        <%= info %>
-    </div>
-    <button class="flash-close">
-        <i class="fa-solid fa-xmark"></i>
-    </button>
-</div>
-<% } %>
-
-<% if(warning && warning.length > 0){ %>
+<% if (typeof warning !== "undefined" && warning.length) { %>
 
 <div class="flash-message flash-warning">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <span><%= warning %></span>
+    <button class="flash-close">&times;</button>
+</div>
 
-    <div class="flash-icon">
-        <i class="fa-solid fa-triangle-exclamation"></i>
-    </div>
-    <div class="flash-content">
-        <%= warning %>
-    </div>
-    <button class="flash-close">
-        <i class="fa-solid fa-xmark"></i>
-    </button>
+<% } %>
+
+
+<% if (typeof info !== "undefined" && info.length) { %>
+
+<div class="flash-message flash-info">
+    <i class="fa-solid fa-circle-info"></i>
+    <span><%= info %></span>
+    <button class="flash-close">&times;</button>
 </div>
 
 <% } %>

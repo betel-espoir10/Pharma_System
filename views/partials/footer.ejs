@@ -56,5 +56,30 @@
 
     </script>
 
+    <script>
+
+      function updateClock(){
+
+          const now = new Date();
+
+          document.getElementById("currentDate").innerHTML =
+              now.toLocaleDateString("fr-FR",{
+                  weekday:"long",
+                  year:"numeric",
+                  month:"long",
+                  day:"numeric"
+              });
+
+          document.getElementById("currentTime").innerHTML =
+              now.toLocaleTimeString();
+
+      }
+
+      setInterval(updateClock,1000);
+
+      updateClock();
+
+    </script>
+
 </body>
 </html>

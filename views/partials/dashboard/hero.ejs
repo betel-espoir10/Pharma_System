@@ -1,0 +1,45 @@
+<div class="hero-dashboard mb-4">
+
+    <div class="row align-items-center">
+
+        <div class="col-lg-8">
+
+            <h2 class="hero-title">
+
+                Bonjour <%= typeof user !== 'undefined' && user ? user.name : "Administrateur" %> 👋
+
+            </h2>
+
+            <p class="hero-subtitle">
+
+                Bienvenue sur votre plateforme de gestion pharmaceutique.
+
+            </p>
+
+            <p class="hero-description">
+
+                Gérez efficacement vos ventes, achats, stocks, clients et fournisseurs.
+
+            </p>
+
+        </div>
+
+        <div class="col-lg-4 text-lg-end">
+
+            <div class="hero-date">
+
+                <span id="currentDate"></span>
+
+            </div>
+
+            <div class="hero-time">
+
+                <span id="currentTime"></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
