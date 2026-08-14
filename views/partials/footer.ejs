@@ -11,35 +11,12 @@
         <script src="/js/chart.min.js"></script>
         <script src="/js/dashboard.js"></script>
 
-<style>
-      .footer-info {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: black;
-        color: white;
-        text-align: center;
-      }
-    </style>
         <footer 
           class="footer-info"> Copyright &copy; - Advanced Web Development ( INES ) - 2026 - By : 
           <strong>@betelespoir</strong>  
        </footer> 
 
 
-  <!-- JS -->
-    <script>
-      const toggleBtn = document.getElementById("toggleSidebar");
-      const sidebar = document.getElementById("sidebar");
-      const content = document.getElementById("content");
-
-      toggleBtn.addEventListener("click", () => {
-        sidebar.classList.toggle("collapsed");
-        content.classList.toggle("expanded");
-      });
-    </script> 
-    
     <!-- Script flash Message Alerte -->
 
     <script>
@@ -74,8 +51,10 @@
               now.toLocaleTimeString();
       }
 
-      setInterval(updateClock,1000);
-      updateClock();
+      if (document.getElementById("currentDate") && document.getElementById("currentTime")) {
+        setInterval(updateClock,1000);
+        updateClock();
+      }
     </script>
 
 

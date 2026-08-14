@@ -125,3 +125,22 @@
         .password-toggle{
             cursor:pointer;
         }
+
+        @media (max-width: 575.98px){
+            body{
+                min-height:100dvh;
+                height:auto;
+                overflow:auto;
+                padding:16px;
+            }
+
+            .login-card{
+                width:100%;
+                max-width:420px;
+                padding:28px 20px;
+                border-radius:16px;
+            }
+
+            .login-title{ margin-bottom:22px; }
+            .login-title h2{ font-size:1.6rem; }
+        }

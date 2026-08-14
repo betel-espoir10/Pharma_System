@@ -73,3 +73,16 @@
         top:-120px;
     }
 }
+
+@media (max-width: 575.98px){
+    .flash-message{
+        left:12px;
+        right:12px;
+        transform:none;
+        min-width:0;
+        max-width:none;
+        width:auto;
+        padding:14px;
+        font-size:14px;
+    }
+}
