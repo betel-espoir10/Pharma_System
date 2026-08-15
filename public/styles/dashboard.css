@@ -135,3 +135,26 @@
     background:#ec4899;
 
 }
+
+.chart-container {
+    position: relative;
+    min-height: 350px;
+}
+
+.chart-empty-state {
+    min-height: 350px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    color: #6c757d;
+    text-align: center;
+}
+
+@media (max-width: 767.98px) {
+    .chart-container,
+    .chart-empty-state {
+        min-height: 260px;
+    }
+}
